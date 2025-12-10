@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import sys
-
+import datetime
 
 if __name__ == '__main__':
     contacts = []
@@ -23,14 +23,13 @@ if __name__ == '__main__':
             contact = {
                 'name': name,
                 'number': number,
-                'date': birth_date,
+                'date': datetime.date(birth_date[2],birth_date[1],birth_date[0])
             }
+
             contacts.append(contact)
 
             if len(contacts) > 1:
-                contacts.sort(key=lambda item: (item.get('date', [0, 0, 0])[2],
-                                                item.get('date', [0, 0, 0])[1],
-                                                item.get('date', [0, 0, 0])[0]))
+                contacts.sort(key=lambda item: item.get('date',''))
 
         elif command == 'list':
             line = '+-{}-+-{}-+-{}-+-{}-+'.format(
@@ -48,15 +47,15 @@ if __name__ == '__main__':
             print(line)
 
             for idx, contact in enumerate(contacts, 1):
-                date_list = contact.get('date', [0, 0, 0])
-                date_str = f"{date_list[0]}.{date_list[1]}.{date_list[2]}"
-
+                #date_list = contact.get('date', [0, 0, 0])
+                #date_str = f"{date_list[0]}.{date_list[1]}.{date_list[2]}"
+                cur_date = contact.get('date')
                 print(
                     '| {:>4} | {:<30} | {:<25} | {:<20} |'.format(
                         idx,
                         contact.get('name', ''),
                         contact.get('number', ''),
-                        date_str
+                        f'{cur_date.day}.{cur_date.month}.{cur_date.year}'
                     )
                 )
                 print(line)

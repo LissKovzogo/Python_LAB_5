@@ -10,4 +10,5 @@ if __name__ == '__main__':
     print(f'Исходный словарь: {first_dict}')
     dict_items = first_dict.items()
     reversed_dict = {value: key for key, value in dict_items}
+    print(dict_items)
     print(f'Обратный словарь: {reversed_dict}')
