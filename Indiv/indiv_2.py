@@ -47,7 +47,7 @@ if __name__ == '__main__':
             print(line)
 
             for idx, contact in enumerate(contacts, 1):
-                date_str = (contact.get('date', datetime.min)).strftime("%d.%m.%Y")
+                date_str = (contact.get('date', '')).strftime("%d.%m.%Y")
                 print(
                     '| {:>4} | {:<30} | {:<25} | {:<20} |'.format(
                         idx,
