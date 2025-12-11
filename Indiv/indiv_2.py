@@ -15,15 +15,15 @@ if __name__ == '__main__':
         elif command == "add":
             name = input("Фамилия и инициалы?  ")
             number = input("Номер телефона? ")
-            birth_date = list(map(int, input("Дата рождения (в формате XX.XX.XXXX)? ").split('.')))
-
+            birth_date = datetime.strptime(input("Дата рождения (в формате DD.MM.YYYY)? "), "%d.%m.%Y")
+            
             if number[0] == '+':
                 number = '8' + number[2:]
 
             contact = {
                 'name': name,
                 'number': number,
-                'date': datetime.date(birth_date[2],birth_date[1],birth_date[0])
+                'date': birth_date
             }
 
             contacts.append(contact)
@@ -47,15 +47,13 @@ if __name__ == '__main__':
             print(line)
 
             for idx, contact in enumerate(contacts, 1):
-                #date_list = contact.get('date', [0, 0, 0])
-                #date_str = f"{date_list[0]}.{date_list[1]}.{date_list[2]}"
-                cur_date = contact.get('date')
+                date_str = (contact.get('date', datetime.min)).strftime("%d.%m.%Y")
                 print(
                     '| {:>4} | {:<30} | {:<25} | {:<20} |'.format(
                         idx,
                         contact.get('name', ''),
                         contact.get('number', ''),
-                        f'{cur_date.day}.{cur_date.month}.{cur_date.year}'
+                        date_str
                     )
                 )
                 print(line)
